@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
+  code: {
+    required: true,
+    unique: true,
+    type: String,
+    maxlength: 20
+  },
   name: {
     required: true,
     type: String,
@@ -48,6 +54,6 @@ const productSchema = new mongoose.Schema({
   },
   images: [String],
   // facturapiid: { type: String, required: true }
-});
+}, { versionKey: false });
 
 module.exports = mongoose.model('Product', productSchema);

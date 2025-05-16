@@ -1,6 +1,13 @@
+const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
 
 const cartSchema = new mongoose.Schema({
+    code: {
+    required: true,
+    unique: true,
+    type: String,
+    default: uuidv4 
+  },
   user: { required: true, type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   products: [
     {
@@ -11,8 +18,8 @@ const cartSchema = new mongoose.Schema({
   status: { 
     required: true, 
     type: String, 
-    enum: ['activo', 'cerrado'], 
-    default: 'activo' 
+    enum: ['ACTIVE', 'CLOSED'], 
+    default: 'ACTIVE' 
   },
   subtotal: { 
     required: true, 
@@ -36,6 +43,6 @@ const cartSchema = new mongoose.Schema({
   },
   closingDate: { type: Date }
   // stripeId: {type: String},
-});
+}, { versionKey: false });
 
 module.exports = mongoose.model('shopcarts', cartSchema);

@@ -21,12 +21,13 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         required: true,
-        type: String,
         unique: true,
+        type: String,
         match: [/\S+@\S+\.\S+/, 'Correo electrónico inválido']
     },
     password: {
         required: true,
+        select: false,
         type: String,
     },
     direction: {
