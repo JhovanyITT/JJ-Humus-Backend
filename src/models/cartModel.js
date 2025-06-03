@@ -36,13 +36,8 @@ const cartSchema = new mongoose.Schema({
     type: Number, 
     default: 0 
   },
-  creationDate: { 
-    required: true, 
-    type: Date, default: 
-    Date.now 
-  },
   closingDate: { type: Date }
   // stripeId: {type: String},
-}, { versionKey: false });
+}, { versionKey: false, timestamps: { createdAt: 'creationDate', updatedAt: 'lastDataModification' } });
 
 module.exports = mongoose.model('shopcarts', cartSchema);

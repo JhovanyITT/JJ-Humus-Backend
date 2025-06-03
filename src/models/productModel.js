@@ -19,11 +19,29 @@ const productSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 30
   },
-  description: {
+  summary: {
     required: true,
     type: String,
     minlength: 10,
     maxlength: 255
+  },
+  description: {
+    required: true,
+    type: String,
+    minlength: 10,
+  },
+  benefits: {
+    required: true,
+    type: String,
+    minlength: 10,
+  },
+  composition: {
+    type: String,
+    minlength: 10,
+  },
+  specifications: {
+    type: String,
+    minlength: 10,
   },
   price: {
     required: true,
@@ -42,18 +60,8 @@ const productSchema = new mongoose.Schema({
     min: 0,
     default: 0
   },
-  creationDate: {
-    required: true,
-    type: Date,
-    default: Date.now
-  },
-  lastDataModification: {
-    required: true,
-    type: Date,
-    default: Date.now
-  },
   images: [String],
   // facturapiid: { type: String, required: true }
-}, { versionKey: false });
+}, { versionKey: false, timestamps: { createdAt: 'creationDate', updatedAt: 'lastDataModification' } });
 
 module.exports = mongoose.model('Product', productSchema);

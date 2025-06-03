@@ -48,17 +48,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['CreditCard', 'DebitCard']
     },
-    creationDate: {
-        required: true,
-        type: Date,
-        default: Date.now
-    },
-    lastDataModification: {
-        required: true,
-        type: Date,
-        default: Date.now
-    }
-}, { versionKey: false });
+}, { versionKey: false, timestamps: { createdAt: 'creationDate', updatedAt: 'lastDataModification' } });
 
 
 // Middleware antes de guardar
@@ -70,8 +60,6 @@ userSchema.pre('save', async function (next) {
     if (this.isModified('password')) {
         this.password = await bcrypt.hash(this.password.trim(), 10);
     }
-
-    this.lastDataModification = Date.now();
     next();
 });
 
@@ -92,8 +80,6 @@ userSchema.pre('findOneAndUpdate', async function (next) {
     if (update.password) {
         update.password = await bcrypt.hash(update.password.trim(), 10);
     }
-
-    update.lastDataModification = Date.now();
     next();
 });
 
