@@ -8,7 +8,8 @@ const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 
-mongoose.connect(appConf.MONGO_URL)
+
+mongoose.connect(`${appConf.MONGO_URL}`)
   .then(() => console.log('Conexión a MongoDB exitosa'))
   .catch((error) => {
     console.error('Error al conectar a MongoDB:', error);
